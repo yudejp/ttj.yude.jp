@@ -1,0 +1,37 @@
+# Misskey
+misskey/.config
+misskey/db
+misskey/files
+misskey/redis
+misskey/backup
+
+# MusicBot
+musicbot/data
+
+# Roundcube
+roundcube/db
+
+# Mastodon
+mastodon/postgres
+mastodon/public
+mastodon/redis
+mastodon/.env.production
+mastodon/backup
+
+# addchan
+addchan/.env
+
+# nostr
+nostr/config.toml
+
+# dtv
+dtv
+
+# inubot
+inubot/.env
+inubot/data
+
+# mastodon
+mastodon/backup
+mastodon/postgres
+mastodon/.env.production

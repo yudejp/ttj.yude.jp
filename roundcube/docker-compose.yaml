@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  roundcubemail:
+    image: roundcube/roundcubemail:latest
+    container_name: roundcubemail
+    restart: unless-stopped
+    volumes:
+      - ./db/sqlite:/var/roundcube/db
+    environment:
+      - ROUNDCUBEMAIL_DB_TYPE=sqlite
+      - ROUNDCUBEMAIL_SKIN=elastic
+      - ROUNDCUBEMAIL_DEFAULT_HOST=tls://yudejp.sakura.ne.jp
+      - ROUNDCUBEMAIL_SMTP_SERVER=tls://yudejp.sakura.ne.jp
+  
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url http://roundcubemail --no-chunked-encoding run roundcube.yude.jp
+    volumes:
+      - '$HOME/.cloudflared:/root/.cloudflared'

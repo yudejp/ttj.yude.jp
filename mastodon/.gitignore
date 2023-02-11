@@ -1,0 +1,6 @@
+.env.production
+postgres
+public
+redis
+*.rdb
+*.dump
