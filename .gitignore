@@ -35,3 +35,7 @@ inubot/data
 mastodon/backup
 mastodon/postgres
 mastodon/.env.production
+
+# mi.yude.moe-db-replica
+mi.yude.moe-db-replica/.env
+mi.yude.moe-db-replica/postgresql.conf
