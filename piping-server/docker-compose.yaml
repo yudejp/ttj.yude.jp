@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  piping-server:
+    image: nwtgck/piping-server
+    restart: unless-stopped
+  
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url http://piping-server:8080 --no-chunked-encoding run p.yude.jp
+    volumes:
+      - '$HOME/.cloudflared:/root/.cloudflared'
