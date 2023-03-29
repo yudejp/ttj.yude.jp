@@ -67,7 +67,7 @@ services:
     restart: unless-stopped
     command: tunnel --url http://web-nginx --no-chunked-encoding run tt-rss.yude.jp
     volumes:
-      - '$HOME/.cloudflared:/root/.cloudflared'
+      - '/data/.cloudflared:/root/.cloudflared'
 
 volumes:
   db:

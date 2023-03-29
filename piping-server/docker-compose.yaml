@@ -10,4 +10,4 @@ services:
     restart: unless-stopped
     command: tunnel --url http://piping-server:8080 --no-chunked-encoding run p.yude.jp
     volumes:
-      - '$HOME/.cloudflared:/root/.cloudflared'
+      - '/data/.cloudflared:/root/.cloudflared'

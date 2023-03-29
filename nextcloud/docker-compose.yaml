@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13.5-alpine
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    env_file:
+      - db.env
+
+  redis:
+    image: redis:alpine
+    restart: always
+
+  app:
+    image: nextcloud:fpm
+    restart: always
+    volumes:
+      - ./data/html:/var/www/html
+    environment:
+      - POSTGRES_HOST=db
+      - REDIS_HOST=redis
+      - PHP_MEMORY_LIMIT=3G
+      - PHP_UPLOAD_LIMIT=100G
+    env_file:
+      - db.env
+    depends_on:
+      - db
+      - redis
+  #  command: bash -c "apt -y update && apt -y upgrade && apt -y install libmagickcore-6.q16-6-extra cifs-utils libsmbclient-dev && pecl install smbclient && docker-php-ext-enable smbclient && php-fpm"
+  
+  web:
+    image: nginx
+    restart: always
+    container_name: nextcloud
+    ports:
+      - 9020:80
+    links:
+      - app
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled:ro
+    volumes_from:
+      - app
+    depends_on:
+      - app
+
+  cron:
+    image: nextcloud:apache
+    restart: always
+    volumes:
+      - ./data/html:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
+
+  # Comment out below if you won't use
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url http://web --no-chunked-encoding run nc.yude.jp
+    volumes:
+      - '$HOME/.cloudflared:/root/.cloudflared'

@@ -19,4 +19,4 @@ services:
     restart: unless-stopped
     command: tunnel --url http://roundcubemail --no-chunked-encoding run roundcube.yude.jp
     volumes:
-      - '$HOME/.cloudflared:/root/.cloudflared'
+      - '/data/.cloudflared:/root/.cloudflared'

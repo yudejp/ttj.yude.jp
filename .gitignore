@@ -39,3 +39,21 @@ mastodon/.env.production
 # mi.yude.moe-db-replica
 mi.yude.moe-db-replica/.env
 mi.yude.moe-db-replica/postgresql.conf
+mi.yude.moe-db-replica/db
+
+# gitea
+gitea/data
+
+# vscode
+.vscode
+
+# nextcloud
+nextcloud/data
+
+# nostr
+nostr/data
+
+# minecraft
+minecraft/paper/plugins
+minecraft/waterfall/plugins
+minecraft/db

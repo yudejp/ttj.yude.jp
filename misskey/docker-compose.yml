@@ -2,7 +2,7 @@ version: "3"
 
 services:
   web:
-    image: ghcr.io/yudejp/mi.yude.moe:master
+    image: ghcr.io/yudejp/misskey:master
     restart: always
     links:
       - db
@@ -42,7 +42,7 @@ services:
     restart: unless-stopped
     command: tunnel --url http://nginx --no-chunked-encoding run misskey.yude.jp
     volumes:
-      - '$HOME/.cloudflared:/root/.cloudflared'
+      - '/data/.cloudflared:/root/.cloudflared'
 
 volumes:
   socks:

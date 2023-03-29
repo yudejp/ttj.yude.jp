@@ -1,0 +1,55 @@
+version: '3.9'
+
+services:
+
+  # PaperMC
+  paper:
+    image: ghcr.io/yudejp/paper-docker:master
+    restart: on-failure:3
+    container_name: papermc
+    ports:
+      - 25565:25565
+    stdin_open: true
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xms1G -Xmx2G"
+    volumes:
+      - ./paper:/app
+    depends_on:
+      - "db"
+
+  # Waterfall
+#  waterfall:
+#    image: ghcr.io/yudejp/waterfall-docker:master
+#    volumes:
+#      - ./waterfall:/app
+#    tty: true
+#    stdin_open: true
+#    ports:
+#      - 25565:25565
+#    environment:
+#      JAVA_OPTS: "-Xms256M -Xmx512M"
+#    depends_on:
+#      - "db"
+#    restart: on-failure:3
+
+  # MariaDB
+  db:
+    restart: unless-stopped
+    image: mariadb:10.7.3-focal
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/log:/var/log/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+        TZ: 'Asia/Tokyo'
+        MYSQL_ROOT_PASSWORD: 'root'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url http://paper:8100 --no-chunked-encoding run bluemap.yude.jp
+    volumes:
+      - '/root/.cloudflared:/root/.cloudflared'

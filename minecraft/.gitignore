@@ -1,0 +1,81 @@
+# Jar
+*.jar
+
+# paper
+## Libraries, caches, etc.
+paper/libraries
+paper/versions
+paper/logs
+paper/cache
+paper/version_history.json
+paper/usercache.json
+paper/.console_history
+#eBackups
+paper/plugins/eBackup/backups
+## Worlds
+paper/world
+paper/world_nether
+paper/world_the_end
+## Configurations
+paper/eula.txt
+paper/wepif.yml
+### mcMMO
+paper/plugins/mcMMO/backup
+paper/plugins/mcMMO/flatfile
+paper/plugins/mcMMO/locales
+paper/plugins/mcMMO/upgrades_overhaul.yml
+### LuckPerms
+paper/plugins/LuckPerms/translations
+paper/plugins/LuckPerms/libs
+paper/plugins/LuckPerms/contexts
+paper/plugins/LuckPerms/ja_JP.yml
+paper/plugins/LuckPerms/luckperms-h2.mv.db
+### LockettePro
+paper/plugins/LockettePro/lang*
+### ImageMaps
+paper/plugins/ImageMaps/images
+paper/plugins/ImageMaps/maps.yml
+### CoreProtect
+paper/plugins/CoreProtect/.license
+paper/plugins/CoreProtect/database.db
+paper/plugins/CoreProtect/language.yml
+### bStats
+paper/plugins/bStats/config.yml
+### BlueMap
+paper/bluemap
+paper/BlueMap
+### Multiverse-Core
+paper/plugins/Multiverse-Core/scripts
+paper/plugins/Multiverse-Core/worlds.yml
+### PluginMetrics
+paper/plugins/PluginMetrics/config.yml
+### ProtocolLib
+paper/plugins/ProtocolLib/lastupdate
+### VeinMiner
+paper/plugins/VeinMiner/playerdata
+### WorldEdit
+paper/plugins/WorldEdit/.archive-unpack
+paper/plugins/WorldEdit/assets
+paper/plugins/WorldEdit/schematics
+paper/plugins/WorldEdit/sessions
+### WorldGuard
+paper/plugins/WorldGuard/cache
+paper/plugins/WorldGuard/worlds
+### OasisWarps
+paper/plugins/OasisWarps/warps.yml
+paper/server.properties
+
+# Waterfall
+## Libraries, caches, etc.
+waterfall/modules
+waterfall/logs
+## Configurations
+waterfall/locations.yml
+### bStats
+waterfall/plugins/bStats/temp.txt
+waterfall/config.yml
+
+# Database
+## data directory
+db/data
+paper/map-color-cache.dat

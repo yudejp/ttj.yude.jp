@@ -2,6 +2,7 @@ version: '3.9'
 services:
   nginx:
     image: nginx:latest
+    restart: unless-stopped
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./html:/var/www/html
@@ -12,4 +13,4 @@ services:
     restart: unless-stopped
     command: tunnel --url http://nginx:8080 --no-chunked-encoding run tottori.yude.jp
     volumes:
-      - '$HOME/.cloudflared:/root/.cloudflared'
+      - '/data/.cloudflared:/root/.cloudflared'
