@@ -56,7 +56,7 @@ services:
       - db
       - redis
 
-  # Comment out below if you won't use
+  # Cloudflare Tunnel を使わない場合、下記をコメントアウトしてください。
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root
