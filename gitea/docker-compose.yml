@@ -35,6 +35,6 @@ services:
     image: cloudflare/cloudflared:latest
     user: root
     restart: unless-stopped
-    command: tunnel --url http://server:3000 --no-chunked-encoding run git.yude.jp
+    command: tunnel --url http://server:3000 --no-chunked-encoding run git.soine.site
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
