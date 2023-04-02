@@ -16,10 +16,6 @@ services:
       LDAP_READONLY_USER: "false"
       LDAP_TLS: "false"
       LDAP_TLS_VERIFY_CLIENT: "never"
-      # デフォルトでは自己署名証明書を自動生成、本番環境では下記コメントを外して証明書を指定
-      # LDAP_TLS_CRT_FILENAME: "ldap.crt"    # SSL証明書
-      # LDAP_TLS_KEY_FILENAME: "ldap.key"    # SSL秘密鍵
-      # LDAP_TLS_CA_CRT_FILENAME: "ca.crt"   # クライアント認証用CA証明書、使用しなくても指定は必須
     volumes:
       - ./data/ldap_db:/var/lib/ldap
       - ./data/ldap_config:/etc/ldap/slapd.d
@@ -126,7 +122,6 @@ services:
       # >>> SASL LDAP Authentication
       - ENABLE_SASLAUTHD=1
       - SASLAUTHD_MECHANISMS=ldap
-      # - SASLAUTHD_LDAP_FILTER=(&(mail=%U@soine.site)(objectClass=inetOrgPerson))
       - SASLAUTHD_LDAP_FILTER=(&(objectClass=posixAccount)(uid=%u))
       # <<< SASL LDAP Authentication
 
