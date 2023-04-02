@@ -1,3 +1,5 @@
+.env
+
 # Misskey
 misskey/.config
 misskey/db
@@ -63,3 +65,9 @@ mstdn.soine.site/postgres
 mstdn.soine.site/public
 mstdn.soine.site/redis
 mstdn.soine.site/.env.production
+
+# roundcube-soine-site
+roundcube-soine-site/db
+
+# soine
+soine/data

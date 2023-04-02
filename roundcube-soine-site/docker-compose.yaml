@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    image: roundcube/roundcubemail:latest
+    restart: unless-stopped
+    volumes:
+      - ./db/sqlite:/var/roundcube/db
+    environment:
+      - ROUNDCUBEMAIL_DEFAULT_PORT=143
+      - ROUNDCUBEMAIL_DB_TYPE=sqlite
+      - ROUNDCUBEMAIL_SKIN=elastic
+      - ROUNDCUBEMAIL_DEFAULT_HOST=tls://v4raw-tottori.soine.site
+      - ROUNDCUBEMAIL_SMTP_SERVER=tls://v4raw-tottori.soine.site
+  
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url http://app --no-chunked-encoding run mail.soine.site
+    volumes:
+      - '/root/.cloudflared:/root/.cloudflared'
