@@ -5,10 +5,11 @@ services:
   # PaperMC
   paper:
     image: ghcr.io/yudejp/paper-docker:master
-    restart: on-failure:3
+    restart: always
     container_name: papermc
     ports:
       - 25565:25565
+#      - 192.168.24.15:25565:25565
     stdin_open: true
     environment:
       JAVA_TOOL_OPTIONS: "-Xms1G -Xmx2G"

@@ -131,3 +131,11 @@ services:
 
     cap_add:
       - NET_ADMIN
+
+  cloudflared-soine-nginx:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url http://192.168.24.17 --no-chunked-encoding run soine.site
+    volumes:
+      - '/root/.cloudflared:/root/.cloudflared'

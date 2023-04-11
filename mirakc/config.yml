@@ -1,0 +1,30 @@
+epg:
+  cache-dir: /var/lib/mirakc/epg
+
+server:
+  addrs:
+    - http: 0.0.0.0:40772
+    - unix: /var/run/mirakurun/mirakurun.sock
+
+channels:
+  - name: 'NHK 総合'
+    type: 'GR'
+    channel: '29'
+  - name: 'NHK Eテレ'
+    type: 'GR'
+    channel: '20'
+  - name: '日本海テレビ'
+    type: 'GR'
+    channel: '38'
+  - name: '山陰放送'
+    type: 'GR'
+    channel: '31'
+  - name: '山陰中央テレビ'
+    type: 'GR'
+    channel: '36'
+
+tuners:
+  - name: upstream
+    types: [GR, BS]
+    command: >-
+      curl -s http://192.168.24.2:40772/api/channels/{{{channel_type}}}/{{{channel}}}/stream
