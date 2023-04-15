@@ -77,7 +77,7 @@ services:
     hostname: soine.site
     domainname: soine.site
     user: 0:0
-
+    restart: always
     ports:
       - "25:25"
       - "143:143"
