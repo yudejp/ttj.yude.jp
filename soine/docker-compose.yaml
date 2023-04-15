@@ -3,7 +3,7 @@ services:
   ldap:
     image: osixia/openldap:1.5.0
     container_name: ldap
-    restart: on-failure:3
+    restart: always
     hostname: ldap.soine.site
     ports:
       - 636:636
@@ -48,6 +48,10 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    volumes:
+      - lam-config:/etc/ldap-account-manager
+      - lam-lib:/var/lib/ldap-account-manager
+
   proxy:
     image: jwilder/nginx-proxy
     container_name: proxy
@@ -139,3 +143,7 @@ services:
     command: tunnel --url http://192.168.24.17 --no-chunked-encoding run soine.site
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
+
+volumes:
+  lam-config:
+  lam-lib:
