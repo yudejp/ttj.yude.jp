@@ -2,6 +2,7 @@ services:
   nostr:
     container_name: nostr-relay
     image: ghcr.io/yude/nostr-rs-relay:master
+    restart: always
     volumes:
       - type: bind
         source: "./data"
