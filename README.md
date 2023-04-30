@@ -1,5 +1,5 @@
-# tottori.yude.jp
-🐬 All Docker containers running on [tottori.yude.jp](https://tottori.yude.jp).
+# ttj.docker
+🐬 All Docker containers running on Tottori, Japan.
 
 ## License
 MIT License
