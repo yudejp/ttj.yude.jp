@@ -75,3 +75,18 @@ soine/data
 # KonomiTV
 konomitv/data
 konomitv/cap
+
+# aiobahnbot
+aiobahnbot/data
+aiobahnbot/.env
+
+# kanibot
+kanibot/data
+kanibot/.env
+
+# nishinokanabot
+nishinokanabot/data
+nishinokanabot/.env
+
+# metrics-server
+metrics-server/data

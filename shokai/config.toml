@@ -1,0 +1,11 @@
+[general]
+    location_id = "TTJ"
+    location_pretty = "Tottori, Japan"
+    domain = "ttj.yude.jp"
+
+[http]
+    destinations = [
+        "https://www.google.co.jp",
+        "https://hij.yude.jp",
+        "https://hnd.yude.jp"
+    ]

@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  app:
+    container_name: kanibot-discord
+    image: ghcr.io/yudejp/kanibot-discord:master
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data
+    env_file:
+      - ./.env
+    restart: always

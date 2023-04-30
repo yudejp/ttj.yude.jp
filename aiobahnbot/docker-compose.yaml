@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  app:
+    container_name: aiobahnbot-discord
+    image: ghcr.io/iamtakagi-lab/aiobahnbot-discord:master
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data
+    env_file:
+      - ./.env
+    restart: always

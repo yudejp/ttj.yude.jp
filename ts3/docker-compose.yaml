@@ -22,3 +22,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: teamspeak
       MYSQL_DATABASE: teamspeak
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

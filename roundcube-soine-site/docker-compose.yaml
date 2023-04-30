@@ -12,7 +12,9 @@ services:
       - ROUNDCUBEMAIL_SKIN=elastic
       - ROUNDCUBEMAIL_DEFAULT_HOST=tls://v4raw-tottori.soine.site
       - ROUNDCUBEMAIL_SMTP_SERVER=tls://v4raw-tottori.soine.site
-  
+#      - ROUNDCUBEMAIL_DEFAULT_HOST=192.168.25.22
+#      - ROUNDCUBEMAIL_SMTP_SERVER=192.168.25.22
+#      - ROUNDCUBEMAIL_SMTP_PORT=25
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root

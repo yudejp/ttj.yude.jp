@@ -10,4 +10,11 @@ services:
       - type: bind
         source: "./config.toml"
         target: "/usr/src/app/config.toml"
-        
+  
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url http://nostr:8080 --no-chunked-encoding run nostr.yude.jp
+    volumes:
+      - '/root/.cloudflared:/root/.cloudflared'

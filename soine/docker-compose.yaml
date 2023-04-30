@@ -29,7 +29,7 @@ services:
     image: ldapaccountmanager/lam
     container_name: lam
     user: 0:0
-    restart: on-failure:3
+    restart: always
     env_file:
       - .env
     environment:
@@ -59,7 +59,7 @@ services:
     environment:
       DEFAULT_HOST: "lam"
     ports:
-      - 80:80
+      - 22002:80
       - 443:443
     volumes:
       - ./data/certs:/etc/nginx/certs
@@ -72,69 +72,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-  mail:
-    image: docker.io/mailserver/docker-mailserver:latest
-    hostname: soine.site
-    domainname: soine.site
-    user: 0:0
-    restart: always
-    ports:
-      - "25:25"
-      - "143:143"
-      - "587:587"
-      - "993:993"
-
-    volumes:
-      - ./data/dms/mail-data/:/var/mail/
-      - ./data/dms/mail-state/:/var/mail-state/
-      - ./data/dms/mail-logs/:/var/log/mail/
-      - ./data/dms/config/:/tmp/docker-mailserver/
-      - ./config/dovecot-local.conf:/etc/dovecot/local.conf
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-
-    env_file:
-      - .env
-
-    environment:
-      - ENABLE_SPAMASSASSIN=1
-      - ENABLE_CLAMAV=0
-      - ENABLE_FAIL2BAN=0
-      - ENABLE_POSTGREY=1
-
-      - POSTFIX_INET_PROTOCOLS=ipv4
-      - DEFAULT_RELAY_HOST=mmr.plala.or.jp
-      # >>> Postfix LDAP Integration
-      - ACCOUNT_PROVISIONER=LDAP
-      - LDAP_SERVER_HOST=ldap
-      - LDAP_BIND_DN=cn=admin,dc=soine,dc=site
-      - LDAP_SEARCH_BASE=dc=soine,dc=site
-      - LDAP_QUERY_FILTER_DOMAIN=(|(mail=*@%s)(mailAlias=*@%s)(mailGroupMember=*@%s))
-      - LDAP_QUERY_FILTER_USER=(&(objectClass=inetOrgPerson)(mail=%s))
-      - LDAP_QUERY_FILTER_ALIAS=(&(objectClass=inetOrgPerson)(mailAlias=%s))
-      - LDAP_QUERY_FILTER_GROUP=(&(objectClass=inetOrgPerson)(mailGroupMember=%s))
-      - LDAP_QUERY_FILTER_SENDERS=(&(objectClass=inetOrgPerson)(|(mail=%s)(mailAlias=%s)(mailGroupMember=%s)))
-      - SPOOF_PROTECTION=0
-      # <<< Postfix LDAP Integration
-
-      # >>> Dovecot LDAP Integration
-      - DOVECOT_USER_FILTER=(&(objectClass=posixAccount)(uid=%n))
-      - DOVECOT_PASS_ATTRS=uid=user,userPassword=password
-      - DOVECOT_USER_ATTRS==home=/var/mail/%{ldap:uid},=mail=maildir:~/Maildir
-      # <<< Dovecot LDAP Integration
-
-      # >>> SASL LDAP Authentication
-      - ENABLE_SASLAUTHD=1
-      - SASLAUTHD_MECHANISMS=ldap
-      - SASLAUTHD_LDAP_FILTER=(&(objectClass=posixAccount)(uid=%u))
-      # <<< SASL LDAP Authentication
-
-      - ONE_DIR=1
-      - SSL_TYPE=letsencrypt
-      - PERMIT_DOCKER=host
-
-    cap_add:
-      - NET_ADMIN
 
   cloudflared-soine-nginx:
     image: cloudflare/cloudflared:latest
