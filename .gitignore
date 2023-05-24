@@ -90,3 +90,16 @@ nishinokanabot/.env
 
 # metrics-server
 metrics-server/data
+
+# AutoMuteUs
+automuteus/db
+automuteus/redis
+
+# Shlink
+shlink/db
+
+# Vaultwarden
+vaultwarden/data
+
+# youbine
+youbine/data

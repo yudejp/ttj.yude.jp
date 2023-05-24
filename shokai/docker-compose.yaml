@@ -8,11 +8,11 @@ services:
         source: ./config.toml
         target: /app/config.toml
     restart: always
-  
+
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root
-    restart: unless-stopped
+    restart: always
     command: tunnel --url http://app:3000 --no-chunked-encoding run ttj.yude.jp
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'

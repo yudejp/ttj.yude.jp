@@ -41,6 +41,13 @@ services:
   renderer:
     image: grafana/grafana-image-renderer:latest
   
+  switchbot-exporter:
+    image: ghcr.io/yude/switchbot-exporter:master
+    restart: unless-stopped
+    ports:
+      - 8882:8080
+    env_file: .env
+  
   cloudflared-grafana:
     image: cloudflare/cloudflared:latest
     user: root

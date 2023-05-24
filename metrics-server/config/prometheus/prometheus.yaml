@@ -11,7 +11,20 @@ scrape_configs:
     static_configs:
       - targets:
         - prometheus:9090
-  - file_sd_configs:
-    - files:
-      - /etc/prometheus/node.yaml
-    job_name: node
+  # - file_sd_configs:
+  #   - files:
+  #     - /etc/prometheus/node.yaml
+  #   job_name: node
+  - job_name: 'switchbot'
+    scrape_interval: 5m
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+        - D96586B2340E
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: switchbot-exporter:8080

@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    restart: always
+    volumes:
+      - ./data:/data
+    env_file:
+      - .env
+    environment:
+      - DOMAIN=https://vault.yude.jp
+      - WEBSOCKET_ENABLED=true
+  
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url http://vaultwarden --no-chunked-encoding run vault.yude.jp
+    volumes:
+      - '/root/.cloudflared:/root/.cloudflared'
