@@ -1,5 +1,5 @@
 # ttj.docker
-🐬 All Docker containers running on Tottori, Japan.
+🐬 All Docker containers running @ TTJ (Tottori, Japan).
 
 ## License
 MIT License
