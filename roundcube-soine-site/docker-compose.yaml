@@ -3,7 +3,7 @@ version: '2'
 services:
   app:
     image: roundcube/roundcubemail:latest
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./db/sqlite:/var/roundcube/db
     environment:
@@ -18,7 +18,7 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root
-    restart: unless-stopped
+    restart: always
     command: tunnel --url http://app --no-chunked-encoding run mail.soine.site
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
