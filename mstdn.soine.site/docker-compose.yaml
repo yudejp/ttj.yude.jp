@@ -72,28 +72,22 @@ services:
     depends_on:
       - web
 
-  # cron-backup:
-  #   restart: always
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.crontab
-  #   volumes:
-  #     - socks:/var/run
-  #     - type: bind
-  #       source: ./backup
-  #       target: /app/backup
-  #     - type: bind
-  #       source: /megasync-admin-yude-jp/mstdn.yude.jp
-  #       target: /app/compressed
-  #     - type: bind
-  #       source: ./.env.production
-  #       target: /app/.env.production
-  #     - type: bind
-  #       source: ./redis
-  #       target: /app/redis
-  #     - type: bind
-  #       source: ./public
-  #       target: /app/public
+  cron-backup:
+    restart: always
+    build:
+      context: ./backup
+      dockerfile: Dockerfile
+    volumes:
+      - socks:/var/run
+      - type: bind
+        source: /data/mstdn-soine-site-archives
+        target: /app/archives
+      - type: bind
+        source: ./.env.production
+        target: /app/.env.production
+      - type: bind
+        source: ./redis
+        target: /app/redis
 
   cloudflared:
     image: cloudflare/cloudflared:latest
