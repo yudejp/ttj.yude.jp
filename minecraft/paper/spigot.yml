@@ -103,6 +103,8 @@ world-settings:
     nerf-spawner-mobs: false
     max-entity-collisions: 8
     growth:
+      torchflower-modifier: 100
+      pitcherplant-modifier: 100
       twistingvines-modifier: 100
       weepingvines-modifier: 100
       cavevines-modifier: 100
@@ -153,6 +155,7 @@ world-settings:
       exp: 3.0
       item: 2.5
     entity-tracking-range:
+      display: 128
       players: 48
       animals: 48
       monsters: 48
