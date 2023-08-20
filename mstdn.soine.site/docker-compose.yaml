@@ -23,7 +23,7 @@ services:
       - ./redis:/data
 
   web:
-    image: tootsuite/mastodon:v4.0.2
+    image: tootsuite/mastodon:v4.1.5
     container_name: mastodon_web
     restart: always
     env_file: .env.production
@@ -41,7 +41,7 @@ services:
       POSTGRES_PASSWORD: mastodon_
 
   streaming:
-    image: tootsuite/mastodon:v4.0.2
+    image: tootsuite/mastodon:v4.1.5
     container_name: mastodon_streaming
     restart: always
     env_file: .env.production
@@ -53,7 +53,7 @@ services:
       - redis
 
   sidekiq:
-    image: tootsuite/mastodon:v4.0.2
+    image: tootsuite/mastodon:v4.1.5
     restart: always
     env_file: .env.production
     command: bundle exec sidekiq
@@ -80,7 +80,7 @@ services:
     volumes:
       - socks:/var/run
       - type: bind
-        source: /data/mstdn-soine-site-archives
+        source: /root/mstdn-soine-site-archives
         target: /app/archives
       - type: bind
         source: ./.env.production
@@ -95,7 +95,7 @@ services:
     restart: unless-stopped
     command: tunnel --url http://nginx --no-chunked-encoding run mstdn.soine.site
     volumes:
-      - '/root/.cloudflared:/root/.cloudflared'
+      - '$HOME/.cloudflared:/root/.cloudflared'
 
 volumes:
   socks:

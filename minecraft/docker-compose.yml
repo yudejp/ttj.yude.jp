@@ -1,7 +1,6 @@
 version: '3.9'
 
 services:
-
   # PaperMC
   paper:
     image: ghcr.io/yudejp/paper-docker:master
@@ -9,7 +8,6 @@ services:
     container_name: papermc
     ports:
       - 25565:25565
-#      - 192.168.24.15:25565:25565
     stdin_open: true
     environment:
       JAVA_TOOL_OPTIONS: "-Xms1G -Xmx2G"
@@ -17,21 +15,6 @@ services:
       - ./paper:/app
     depends_on:
       - "db"
-
-  # Waterfall
-#  waterfall:
-#    image: ghcr.io/yudejp/waterfall-docker:master
-#    volumes:
-#      - ./waterfall:/app
-#    tty: true
-#    stdin_open: true
-#    ports:
-#      - 25565:25565
-#    environment:
-#      JAVA_OPTS: "-Xms256M -Xmx512M"
-#    depends_on:
-#      - "db"
-#    restart: on-failure:3
 
   # MariaDB
   db:
@@ -52,5 +35,13 @@ services:
     user: root
     restart: unless-stopped
     command: tunnel --url http://paper:8100 --no-chunked-encoding run bluemap.yude.jp
+    volumes:
+      - '/root/.cloudflared:/root/.cloudflared'
+
+  cloudflared-game:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: unless-stopped
+    command: tunnel --url tcp://paper:25565 --no-chunked-encoding run mc.yude.jp
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'

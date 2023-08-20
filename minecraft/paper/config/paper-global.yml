@@ -13,9 +13,9 @@
 # Website: https://papermc.io/
 
 _version: 28
-async-chunks:
-  enable: true
-  threads: -1
+block-updates:
+  disable-noteblock-updates: false
+  disable-tripwire-updates: false
 chunk-loading:
   autoconfig-send-distance: true
   enable-frustum-priority: false
@@ -140,6 +140,7 @@ unsupported-settings:
   allow-headless-pistons: false
   allow-permanent-block-break-exploits: false
   allow-piston-duplication: false
+  compression-format: ZLIB
   perform-username-validation: true
 watchdog:
   early-warning-delay: 10000
