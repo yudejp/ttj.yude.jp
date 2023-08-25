@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  server:
+  app:
     image: gitea/gitea:1.14.3
     container_name: gitea
     environment:
@@ -34,7 +34,7 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root
-    restart: unless-stopped
-    command: tunnel --url http://server:3000 --no-chunked-encoding run git.yude.jp
-    volumes:
-      - '/root/.cloudflared:/root/.cloudflared'
+    restart: always
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN
+    depends_on:
+      - app

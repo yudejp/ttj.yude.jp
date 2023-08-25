@@ -52,7 +52,7 @@ services:
     image: cloudflare/cloudflared:latest
     user: root
     restart: unless-stopped
-    command: tunnel --url http://grafana:3000 --no-chunked-encoding run grafana.yude.jp
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN_GRAFANA
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
   
@@ -60,6 +60,6 @@ services:
     image: cloudflare/cloudflared:latest
     user: root
     restart: unless-stopped
-    command: tunnel --url http://prometheus:9090 --no-chunked-encoding run prometheus.yude.jp
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN_PROMETHEUS
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'

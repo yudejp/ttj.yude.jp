@@ -34,7 +34,7 @@ services:
     image: cloudflare/cloudflared:latest
     user: root
     restart: unless-stopped
-    command: tunnel --url http://paper:8100 --no-chunked-encoding run bluemap.yude.jp
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN_BLUEMAP
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
 
@@ -42,6 +42,6 @@ services:
     image: cloudflare/cloudflared:latest
     user: root
     restart: unless-stopped
-    command: tunnel --url tcp://paper:25565 --no-chunked-encoding run mc.yude.jp
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN_GAME
     volumes:
       - '/root/.cloudflared:/root/.cloudflared'
