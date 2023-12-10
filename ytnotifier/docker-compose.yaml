@@ -1,0 +1,19 @@
+services:
+  app:
+    image: ghcr.io/yude/ytnotifier:master
+    restart: always
+    environment:
+      TZ: "Asia/Tokyo"
+    volumes:
+      - type: bind
+        source: ./config.toml
+        target: /app/config.toml
+      - type: bind
+        source: gokv
+        target: /app/gokv
+
+  restarter:
+    image: docker:cli
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+    command: ["/bin/sh", "-c", "while true; do sleep 86400; docker restart ytnotifier-app-1; done"]
+    restart: always
