@@ -10,19 +10,20 @@
         # EDCB (EpgTimerNW) の TCP API の URL
         # バックエンドに EDCB を選択したときに利用されます。
         # tcp://edcb-namedpipe/ と指定すると、TCP API の代わりに名前付きパイプを使って通信します (ローカルのみ)。
-        'edcb_url': 'tcp://192.168.24.2:4510/',
+        'edcb_url': 'tcp://localhost:4510/',
 
         # Mirakurun の HTTP API の URL
         # バックエンドに Mirakurun を選択したときに利用されます。
-        'mirakurun_url': 'http://192.168.24.2:40772/',
+        'mirakurun_url': 'http://100.116.88.49:40772/',
 
         # 利用するエンコーダー
-        # FFmpeg・QSVEncC・NVEncC・VCEEncC から選択してください。
+        # FFmpeg・QSVEncC・NVEncC・VCEEncC・rkmppenc から選択してください。
         # FFmpeg はソフトウェアエンコーダーです。すべての PC で利用できますが、CPU に多大な負荷がかかり、パフォーマンスが悪いです。
-        # QSVEncC・NVEncC・VCEEncC はハードウェアエンコーダーです。CPU 負荷が低く、パフォーマンスがとても高いです（おすすめ）。
+        # QSVEncC・NVEncC・VCEEncC・rkmppenc はハードウェアエンコーダーです。CPU 負荷が低く、パフォーマンスがとても高いです（おすすめ）。
         # Intel Graphics 搭載の Intel CPU をお使いなら、QSVEncC が使えます。
         # Geforce などの NVIDIA GPU をお使いなら、NVEncC が使えます。
         # Radeon などの AMD GPU をお使いなら、VCEEncC が使えます。
+        # RK3588 などの Rockchip SoC 搭載の ARM SBC をお使いなら、rkmppenc が使えます (いくつか事前設定が必要です) 。
         'encoder': 'FFmpeg',
 
         # 番組情報の更新間隔 (分)
@@ -36,7 +37,7 @@
         # エンコーダーのログを有効にするか
         # 有効にすると、エンコーダーのログが server/logs/KonomiTV-Encoder-(ストリームID).log に保存されます。
         # さらにデバッグモードが有効のときは、デバッグログとしてリアルタイムにエンコーダーのログが出力されます。
-        'debug_encoder': true,
+        'debug_encoder': false,
     },
 
     # Web サーバーの設定
@@ -68,6 +69,17 @@
         # リアルタイムで放送されているものから、指定した TS ファイルのものに強制的に置き換えられます。
         # 開発者がライブストリーミング関連の機能をテストするために使う特殊なデバッグ用設定です。
         'debug_mode_ts_path': null,
+    },
+
+    # ビデオのオンデマンドストリーミングの設定
+    'video': {
+
+        # 録画済み番組の保存先フォルダの絶対パス
+        # 複数の保存先フォルダを指定できます。
+        # Docker でインストールした場合も、ホストマシン側のフォルダの絶対パスを指定してください。
+        'recorded_folders': [
+            '/cap',
+        ]
     },
 
     # キャプチャの設定
