@@ -1,0 +1,5 @@
+backup
+postgres
+redis
+.env
+.env.production
