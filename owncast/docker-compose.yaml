@@ -1,0 +1,17 @@
+version: "3.4"
+services:
+  owncast:
+    image: gabekangas/owncast
+    container_name: "owncast"
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "1935:1935"
+    volumes:
+      - "./data:/app/data"
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: always
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN

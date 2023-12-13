@@ -1,0 +1,14 @@
+services:
+  novnc:
+    build: .
+    environment:
+      - DISPLAY_WIDTH=1024
+      - DISPLAY_HEIGHT=768
+      - RUN_XTERM=no
+    volumes:
+      - ./data/root:/root
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "8080:8080"
+    restart: always
