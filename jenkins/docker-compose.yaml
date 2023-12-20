@@ -1,0 +1,14 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    restart: always
+    user: root
+    volumes:
+      - ./data/jenkins:/var/jenkins_home
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: always
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN
+    depends_on:
+      - jenkins

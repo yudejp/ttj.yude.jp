@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  couch:
+    image: couchdb:latest
+    ports:
+      - 5984:5984
+    env_file:
+      - .env
+    volumes:
+      - ./local.ini:/opt/couchdb/etc/local.ini
+      - ./couchdata:/opt/couchdb/data
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    user: root
+    restart: always
+    command: tunnel --no-autoupdate run --token $CLOUDFLARED_TOKEN
+    depends_on:
+      - couch
